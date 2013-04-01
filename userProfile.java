@@ -1,4 +1,3 @@
-
 public class userProfile {
 
 	userProfile( ){
@@ -6,20 +5,22 @@ public class userProfile {
 	}
 	
 	public String getName(String user){
-		String name //=get full name from database
-		;
+	
 		return name;
 	}
 	
 	public String getOcc(String user){
-		String occupation//=get occupation
-		;
+	
 		return occupation;
 	}
 	
 	public String getAge(String user){
-		String age //=get age
-		;
+	
 		return age;
 	}
+	
+	//doesn't complain about instantiating when you declare them outside the getMethods
+	String name;
+	String occupation;
+	String age;
 }
