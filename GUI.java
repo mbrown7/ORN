@@ -7,12 +7,14 @@ public class GUI extends JFrame implements ActionListener{
 	//then if you leave that panel and return later, the stuff you typed is still there
 	//obviously this is not what I want to be happening
 	
+	DBConnect data = new DBConnect( );
+	
 	JButton log, register, go, post, back, back2, viewProf;
 	//Later on, we want to make the user variable equal to whatever the stored username is
 	//this will be information from another class
 	String user = null;
-	String tweetSet = "Public";
-	JTextArea typeTweet, tweetSpace, searchBox, usernameSpace, passwordSpace, usernameSpace2,
+	String honkSet = "Public";
+	JTextArea typeHonk, tweetSpace, searchBox, usernameSpace, passwordSpace, usernameSpace2,
 		passwordSpace2, passwordSpace3;
 	JScrollPane pane1, pane2;
 	JPanel defaultPanel = new JPanel(null);
@@ -67,9 +69,9 @@ public class GUI extends JFrame implements ActionListener{
 		go = new JButton("Go");
 		go.setBounds(565, 75, 55, 25);
 		
-		typeTweet = new JTextArea(" ");
-		typeTweet.setBounds(25, 300, 440, 80);
-		pane1 = new JScrollPane(typeTweet);
+		typeHonk = new JTextArea(" ");
+		typeHonk.setBounds(25, 300, 440, 80);
+		pane1 = new JScrollPane(typeHonk);
 		pane1.setBounds(25, 300, 440, 80);
 		String[] options = {"Public","Private"};
 		JComboBox pubPrivList = new JComboBox(options);
@@ -226,13 +228,14 @@ public class GUI extends JFrame implements ActionListener{
 			validate( );
 			repaint( );
 		}else if(ev.getActionCommand( ).equals("Go")){
-			//the search
+			String keyword = searchBox.getText( );
+			//search the tweets for the keyword
 		}else if(ev.getActionCommand( ).equals("Post")){
 			if(user == null){
 				statusBox.setText("You must be logged in.");
 			}else{
-				String honk = typeTweet.getText( );
-				if(!hr.post(user, honk, tweetSet)){
+				String honk = typeHonk.getText( );
+				if(!hr.post(user, honk, honkSet)){
 					statusBox.setText("The post has failed.");
 				}else{
 					tweetSpace.setText(honk + "-" + user);
@@ -288,7 +291,7 @@ public class GUI extends JFrame implements ActionListener{
 			
 		}else{
 			JComboBox box = (JComboBox)ev.getSource( );
-			tweetSet = (String) box.getSelectedItem( );
+			honkSet = (String) box.getSelectedItem( );
 		}
 	}
 	
