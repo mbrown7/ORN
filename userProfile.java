@@ -1,24 +1,24 @@
 
 public class userProfile {
 	
-	DBConnect data = new DBConnect( );
+	DBConnect connect = new DBConnect( );
 
 	userProfile( ){
 		;
 	}
 	
 	public String getName(String user){
-		String name = data.getName(user);
+		String name = connect.getName(user);
 		return name;
 	}
 	
-	public String getOcc(String user){
-		String role = data.getRole(user);
-		return role;
+	public String getBirthday(String user){
+		String birthday = connect.getAge(user);
+		return birthday;
 	}
 	
-	public String getAge(String user){
-		String age = data.getAge(user);
-		return age;
+	public String aboutMe(String user){
+		String aboutme = connect.getAboutMe(user);
+		return aboutme;
 	}
 }
