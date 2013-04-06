@@ -25,6 +25,10 @@ public class DBConnect {
     	}
     }
     
+    public void insertSubscribe(String user, String subscribe){
+    	;
+    }
+    
     public String getName(String user){
     	return "Morgan Brown";
     }

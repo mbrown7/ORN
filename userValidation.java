@@ -22,4 +22,13 @@ public class userValidation {
 			return false;
 		}
 	}
+	
+	public boolean newSubscribe(String user, String subscribe){
+		if(isUser(subscribe) && user != null){
+			connect.insertSubscribe(user, subscribe);
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

@@ -398,6 +398,16 @@ public class GUI extends JFrame implements ActionListener{
 			initDefaultGUI( );
 			validate( );
 			repaint( );
+			
+		}else if(ev.getActionCommand( ).equals("Subscribe")){
+			String subscribeTo = subBox.getText( );
+			boolean work = userVal.newSubscribe(user, subscribeTo);
+			if(work){
+				statusBox.setText("You have subscribed to " + subscribeTo);
+			}else{
+				statusBox.setText("There was a subscription error.");
+			}
+			
 		}else{
 			JComboBox box = (JComboBox)ev.getSource( );
 			honkSet = (String) box.getSelectedItem( );
