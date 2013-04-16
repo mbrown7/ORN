@@ -21,4 +21,9 @@ public class userProfile {
 		String aboutme = connect.getAboutMe(user);
 		return aboutme;
 	}
+	
+	public boolean profile(String user, String first, String last, String bday, String me){
+		connect.insertProfile(user, first, last, bday, me);
+		return true;
+	}
 }

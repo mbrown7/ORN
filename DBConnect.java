@@ -15,6 +15,10 @@ public class DBConnect {
     LinkedList<String> subscribe = new LinkedList<String>( );
     LinkedList<String> users = new LinkedList<String>( );
     
+    public void insertProfile(String user, String first, String last, String bday, String me){
+    	;
+    }
+    
     public DBConnect( ){
     	try{
     		Class.forName("com.mysql.jdbc.Driver");

@@ -9,10 +9,7 @@ public class honkReader {
 	}
 	
 	public boolean post(String user, String honk, String setting){
-		if(honk.length( )>140){
-			//if we're out of characters
-			return false;
-		}else if(!connect.getUser(user)){
+		if(!connect.getUser(user)){
 			return false;
 		}else{
 			if(setting == "Public"){
