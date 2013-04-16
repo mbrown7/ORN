@@ -9,7 +9,7 @@ public class GUI extends JFrame implements ActionListener {
 	JButton log, register, go, post, back, back2, viewProf, subButton;
 	String user = null;
 	String honkSet = "Public";
-	JTextArea typeHonk, searchBox, usernameSpace, passwordSpace,
+	JTextArea typeHonk, tweetSpace, searchBox, usernameSpace, passwordSpace,
 			usernameSpace2, passwordSpace2, subBox, userProfBox, aboutSpace,
 			nameSpace, birthSpace, aboutmeSpace;
 	JScrollPane pane1, pane2;
@@ -17,7 +17,6 @@ public class GUI extends JFrame implements ActionListener {
 	JPanel loginPanel = new JPanel(null);
 	JPanel registerPanel = new JPanel(null);
 	JPanel userProfilePanel = new JPanel(null);
-	JPanel tweetPanel = new JPanel(null);
 	JPanel currentPanel;
 	JLabel error, error2, statusBox;
 
@@ -42,7 +41,6 @@ public class GUI extends JFrame implements ActionListener {
 
 		// The default interface, i.e., the home screen - where the tweets will
 		// appear, etc.
-		tweetPanel.removeAll( );
 		log = new JButton(" ");
 		log.setBounds(445, 10, 75, 25);
 		JLabel welcomeUser = new JLabel(" ");
@@ -59,20 +57,15 @@ public class GUI extends JFrame implements ActionListener {
 		register = new JButton("Register");
 		register.setBounds(525, 10, 95, 25);
 
-		tweetPanel.setBounds(25, 50, 440, 245);
-		tweetPanel.setBackground(Color.white);
-		tweetPanel.setLayout(new BoxLayout(tweetPanel, BoxLayout.PAGE_AXIS));
+		tweetSpace.setBounds(25, 50, 440, 245);
+		tweetSpace.setEditable(false);
 		LinkedList<String> honks = hr.getAllPosts(user);
 		Iterator<String> honkIt = honks.iterator();
 		while (honkIt.hasNext()) {
 			String nextHonk = honkIt.next();
-			JLabel honkLabel = new JLabel(nextHonk);
-			// System.out.println(y);
-			// honkLabel.setBounds(30, y, 440, 20);
-			honkLabel.setForeground(Color.red);
-			tweetPanel.add(honkLabel);
+			tweetSpace.append(nextHonk);
 		}
-		pane2 = new JScrollPane(tweetPanel);
+		pane2 = new JScrollPane(tweetSpace);
 		pane2.setBounds(25, 50, 440, 245);
 
 		searchBox = new JTextArea("Search");
@@ -333,17 +326,16 @@ public class GUI extends JFrame implements ActionListener {
 				statusBox.setText("You cannot register while already logged in!");
 			}
 		} else if (ev.getActionCommand().equals("Go")) {
+			tweetSpace.setText("");
 			// this is the search function
-			tweetPanel.removeAll();
 			String keyword = searchBox.getText();
 			LinkedList<String> results = hr.search(user, keyword);
 			Iterator<String> iterator = results.iterator();
 			while (iterator.hasNext()) {
 				String nextHonk = iterator.next();
-				JLabel honkLabel = new JLabel(nextHonk);
-				honkLabel.setForeground(Color.red);
-				tweetPanel.add(honkLabel);
+				tweetSpace.append(nextHonk);
 			}
+			
 		} else if (ev.getActionCommand().equals("Post")) {
 			if (user == null) {
 				statusBox.setText("You must be logged in.");
@@ -353,7 +345,7 @@ public class GUI extends JFrame implements ActionListener {
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"EEE,d MMM HH:mm aaa");
 				String time = sdf.format(rightNow.getTime());
-				honk = "["+time+"] " + honk + " -" + user;
+				String newHonk = "["+time+"] " + honk + " -" + user;
 				int index = honk.indexOf("@");
 				boolean fail = false;
 				while(index !=-1){
@@ -362,17 +354,17 @@ public class GUI extends JFrame implements ActionListener {
 						index2 = honk.length( );
 					}
 					String refdUser = honk.substring(index, index2);
-					if(!hr.post(refdUser, honk, honkSet)){
+					if(!hr.post(refdUser, newHonk, honkSet)){
 						fail = true;
 					}
 					index = honk.indexOf("@", index2);
 				}
 				if (honk.length( )>= 140 || fail){
 					statusBox.setText("The post has failed.");
+				}else if(!hr.post(user, newHonk, honkSet)){
+					statusBox.setText("The post has failed.");
 				}else{
-					JLabel honkLabel = new JLabel(honk);
-					honkLabel.setForeground(Color.red);
-					tweetPanel.add(honkLabel);
+					tweetSpace.append(honk);
 				}
 			}
 
