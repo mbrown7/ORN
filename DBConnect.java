@@ -1,36 +1,31 @@
 
-import java.sql.*;
+
 import java.util.*;
 
 
 public class DBConnect {
     Scanner in = new Scanner(System.in);
-    
-    private Connection con;
-    private Statement stmt;
-    private ResultSet rs;
+
     
     LinkedList<String> publicposts = new LinkedList<String>( );
     LinkedList<String> privateposts = new LinkedList<String>( );
     LinkedList<String> subscribe = new LinkedList<String>( );
     LinkedList<String> users = new LinkedList<String>( );
     
-    public void insertProfile(String user, String first, String last, String bday, String me){
+    public void insertProfile(String user, String first, String last, String bday, String me, String color){
     	;
     }
     
     public DBConnect( ){
-    	try{
-    		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ORN","root","");
-    		stmt = con.createStatement();          
-    	}catch(Exception exp){
-    		;
-    	}
+    	;
     }
     
     public void insertSubscribe(String user, String subscribe){
     	;
+    }
+    
+    public String getColor(String user){
+    	return "green";
     }
     
     public String getName(String user){

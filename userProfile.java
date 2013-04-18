@@ -22,8 +22,13 @@ public class userProfile {
 		return aboutme;
 	}
 	
-	public boolean profile(String user, String first, String last, String bday, String me){
-		connect.insertProfile(user, first, last, bday, me);
+	public String color(String user){
+		String color = connect.getColor(user);
+		return color;
+	}
+	
+	public boolean profile(String user, String first, String last, String bday, String me, String color){
+		connect.insertProfile(user, first, last, bday, me, color);
 		return true;
 	}
 }
